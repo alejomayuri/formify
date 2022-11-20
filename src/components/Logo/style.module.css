@@ -1,0 +1,8 @@
+.container {
+    display: flex;
+    justify-content: start;
+}
+
+.container img {
+    height: 56px;
+}
