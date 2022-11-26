@@ -1,10 +1,10 @@
 import style from "./style.module.css";
-import logo from "../../media/logo.png";
+import logo__w from "../../media/logo__w.png";
 
 export default function Logo() {
   return (
     <div className={style.container}>
-      <img src={logo} alt="logo" />
+      <img src={logo__w} alt="logo" />
     </div>
   );
 }

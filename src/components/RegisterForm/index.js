@@ -1,7 +1,11 @@
+import style from "./style.module.css";
 import { useEffect, useState } from "react";
 import { registerWithEmailAndPassword } from "../../firebase/client";
 import { Link } from "wouter";
 import useUser from "../../hooks/useUser";
+import InitFormContainer from "../global/InitFormContainer";
+import InitButton from "../global/InitButton";
+import InitInput from "../global/InitInput";
 
 export default function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -41,42 +45,31 @@ export default function RegisterForm() {
   }, [isLogged, user]);
 
   return (
-    <div>
-      <form>
-        <h3>Registrarse</h3>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input type="text" name="email" id="email" onChange={handleEmail} />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={handlePassword}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Confirm Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={handleRepeatPassword}
-          />
-        </div>
-        <button type="submit" onClick={handleRegisterWithEmailAndPassword}>
-          Registrarme
-        </button>
-      </form>
-
-      <div>
-        <p>¿Ya tienes cuenta?</p>
-        <Link href="/">
-          <button>Inicia sesión</button>
-        </Link>
-      </div>
-    </div>
+    <InitFormContainer title="Registrarse" typeContainer="register">
+      <InitInput
+        lable="Email"
+        htmlFor="email"
+        type="text"
+        name="email"
+        onChange={handleEmail}
+      />
+      <InitInput
+        lable="Password"
+        htmlFor="password"
+        type="password"
+        name="password"
+        onChange={handlePassword}
+      />
+      <InitInput
+        lable="Repeat Password"
+        htmlFor="repeat_password"
+        type="password"
+        name="repeat_password"
+        onChange={handleRepeatPassword}
+      />
+      <InitButton onClick={handleRegisterWithEmailAndPassword}>
+        Registrarme
+      </InitButton>
+    </InitFormContainer>
   );
 }

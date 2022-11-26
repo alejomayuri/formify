@@ -1,12 +1,13 @@
-import style from "./style.module.css";
 import { useEffect, useState } from "react";
 import {
   loginWithGoogle,
   loginWithEmailAndPassword,
 } from "../../firebase/client";
-import { Link } from "wouter";
 import useUser from "../../hooks/useUser";
 import GoogleIcon from "../Icons/google";
+import InitFormContainer from "../global/InitFormContainer";
+import InitButton from "../global/InitButton";
+import InitInput from "../global/InitInput";
 
 export default function LoginForm() {
   const { user, isLogged } = useUser();
@@ -40,40 +41,28 @@ export default function LoginForm() {
   }, [isLogged, user]);
 
   return (
-    <div className={style.container}>
-      <form>
-        <h3 className={style.title}>Iniciar sesión</h3>
-        <div className={style.input__container}>
-          <label htmlFor="email">Email</label>
-          <input type="text" name="email" id="email" onChange={handleEmail} />
-        </div>
-        <div className={style.input__container}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={handlePassword}
-          />
-        </div>
-        <button
-          className={style.login__button}
-          onClick={handleLoginWithEmailAndPassword}
-          type="submit"
-        >
-          Iniciar sesión
-        </button>
-      </form>
-      <button className={style.login__button} onClick={handleLoginWithGoogle}>
+    <InitFormContainer title="Iniciar sesión" typeContainer="login">
+      <InitInput
+        lable="Email"
+        htmlFor="email"
+        type="text"
+        name="email"
+        onChange={handleEmail}
+      />
+      <InitInput
+        lable="Password"
+        htmlFor="password"
+        type="password"
+        name="password"
+        onChange={handlePassword}
+      />
+      <InitButton onClick={handleLoginWithEmailAndPassword}>
+        Iniciar sesión
+      </InitButton>
+      <InitButton onClick={handleLoginWithGoogle}>
         Iniciar con Google
         <GoogleIcon width={25} />
-      </button>
-      <div className={style.other__option}>
-        <p>¿No tienes cuenta?</p>
-        <Link href="/registro">
-          <button>Regístrate</button>
-        </Link>
-      </div>
-    </div>
+      </InitButton>
+    </InitFormContainer>
   );
 }
